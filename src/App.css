@@ -1,0 +1,71 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.App {
+    text-align: center;
+}
+
+.black-nav {
+    display: flex;
+    background-color: black;
+    width: 100%;
+    color: white;
+    padding: 20px 20px;
+}
+
+.list {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid gray; 
+}
+.list:first-child {border-top:1px solid gray;}
+.list:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.spanBtn {
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 1px solid gray;
+    padding: 6px 20px;
+    border-color: rgb(180, 180, 180);
+    cursor: pointer;
+    user-select: none;
+    margin: 20px 4px;
+    font-size:14px;
+}
+.spanBtn:hover {
+    background-color: rgb(240, 240, 240);
+}
+.goodBtn {
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    border-color: rgb(180, 180, 180);
+    cursor: pointer;
+    user-select: none;
+    margin-left: 20px;
+}
+
+.modal {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #eee;
+    text-align: left;
+    border-radius: 10px;
+    /* display: flex;
+    flex-direction: column;
+    gap:20px; */
+}
+.modal h4 {
+    padding: 16px 10px;
+}
+.modal p {
+    padding: 5px 10px;
+}
