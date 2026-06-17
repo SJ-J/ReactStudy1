@@ -68,7 +68,7 @@ function App() {
         의젓하게 신호등 기다리는 코비🐕‍🦺</button>
 
       {/* 콘텐츠, 버튼 토글: 조건문은 삼항연산자로 작성 */}
-      { postModal == 'on' ? <Modal postTitle={postTitle} postNum={postNum} /> : null }
+      { postModal == 'on' ? <Modal postTitle={postTitle} postNum={postNum} changeTitle={changeTitle} /> : null }
       { smileCovy == 'on' ? <SmileCovy /> : null }
       { waitCovy == 'on' ? <WaitCovy /> : null }
       
@@ -83,6 +83,7 @@ function Modal(props) {   // 콘텐츠 모달
       <h4>{ props.postTitle[props.postNum] }</h4>
       <p>날짜</p>
       <p>내용</p>
+      <button className='spanBtn' onClick={ props.changeTitle }>제목 바꾸기</button>
     </div>
   )
 }
