@@ -51,7 +51,7 @@ function App() {
         postTitle.map(function(list, i) {
           return (
             <li className='list' key={i} 
-                onClick={ ()=>{setPostModal(postModal == 'on' ? 'off' : 'on'); setPostNum(i);} }>
+                onClick={ ()=>{setPostModal(postModal == 'on' && postNum == i ? 'off' : 'on'); setPostNum(i);} }>
               <h4>{ postTitle[i] } 
               <button className='goodBtn' 
                       onClick={ e=>{e.stopPropagation(); changeGoodCnt(i);} }>👍</button> { goodCnt[i] } </h4>
