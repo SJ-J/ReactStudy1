@@ -53,6 +53,18 @@
     margin-left: 20px;
 }
 
+.inputArea {
+    box-sizing: border-box;
+    display: inline-block;
+    border-radius: 20px;
+    border: 1px solid gray;
+    padding: 6px 20px;
+    border-color: rgb(180, 180, 180);
+    user-select: none;
+    margin: 20px 4px;
+    font-size:14px;
+}
+
 .modal {
     margin-top: 20px;
     padding: 20px;

@@ -8,6 +8,7 @@ function App() {
   let [goodCnt, setGoodCnt] = useState(postTitle.map( ()=>0 ));
   let [postModal, setPostModal] = useState('off');
   let [postNum, setPostNum] = useState(0);
+  let newTitle = '견코비는 Python 하렴…🧑‍🎓';
 
   let [smileCovy, setSmileCovy] = useState('off');
   let [waitCovy, setWaitCovy] = useState('off');
@@ -20,10 +21,10 @@ function App() {
   }
 
   // 제목 변경 함수
-  function changeTitle() {
+  function changeTitle(postNum, newTitle) {
     // 배열 내 포인터 변경을 위한 얕은 복사
     let copy = [...postTitle];
-    copy[0] = '견코비는 Python 하렴…🧑‍🎓';
+    copy[postNum] = newTitle;
     setPostTitle(copy);
   }
 
@@ -44,7 +45,7 @@ function App() {
 
       {/* 상단 버튼 영역 */}
       <button className='spanBtn' onClick={ ()=>abcSort() }>가나다순 정렬</button>
-      <button className='spanBtn' onClick={ ()=>changeTitle() }>전공 바꿀래요🔀</button>
+      <button className='spanBtn' onClick={ ()=>changeTitle(postNum, newTitle) }>전공 바꿀래요🔀</button>
 
       {/* 콘텐츠 영역 */}
       {
@@ -78,12 +79,15 @@ function App() {
 
 /* 컴포넌트 영역 */
 function Modal(props) {   // 콘텐츠 모달
+  let [inputModal, setInputModal] = useState('');
+  
   return (
     <div className='modal'>
       <h4>{ props.postTitle[props.postNum] }</h4>
       <p>날짜</p>
       <p>내용</p>
-      <button className='spanBtn' onClick={ props.changeTitle }>제목 바꾸기</button>
+      <input className='inputArea' placeholder='변경할 제목을 입력해 주세요.' onChange={ (e)=>setInputModal(e.target.value) }></input>
+      <button className='spanBtn' onClick={ ()=>props.changeTitle(props.postNum, inputModal) }>제목 바꾸기</button>
     </div>
   )
 }
