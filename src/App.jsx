@@ -9,6 +9,7 @@ function App() {
   let [postModal, setPostModal] = useState('off');
   let [postNum, setPostNum] = useState(0);
   let newTitle = '견코비는 Python 하렴…🧑‍🎓';
+  let [insertTitle, setInsertTitle] = useState('');
 
   let [smileCovy, setSmileCovy] = useState('off');
   let [waitCovy, setWaitCovy] = useState('off');
@@ -35,6 +36,18 @@ function App() {
     setGoodCnt(copy);
   }
 
+  // 글 등록 함수
+  function insertTitles(insertTitle) {
+    let copy = [...postTitle];
+    setPostTitle(copy.concat(insertTitle));
+  }
+
+  // 글 삭제 함수
+  // function deleteTitles(postNum) {
+  //   let copy = [...postTitle];
+  //   setPostTitle(copy.filter(postNum));
+  // }
+
   return (
     <div className='App'>
 
@@ -55,7 +68,10 @@ function App() {
                 onClick={ ()=>{setPostModal(postModal == 'on' && postNum == i ? 'off' : 'on'); setPostNum(i);} }>
               <h4>{ postTitle[i] } 
               <button className='goodBtn' 
-                      onClick={ e=>{e.stopPropagation(); changeGoodCnt(i);} }>👍</button> { goodCnt[i] } </h4>
+                      onClick={ e=>{e.stopPropagation(); changeGoodCnt(i);} }>👍</button> { goodCnt[i] } 
+              {/* <button className='goodBtn' style={{color: 'white', backgroundColor: 'gray', borderRadius: '5px', padding: '1px 3px'}}
+              onClick={ (e)=>{e.stopPropagation(); deleteTitles(i); } }> 삭제 </button> */}
+              </h4>
               <p>2026년 06월 16일</p>
             </li>
           )
@@ -72,6 +88,13 @@ function App() {
       { postModal == 'on' ? <Modal postTitle={postTitle} postNum={postNum} changeTitle={changeTitle} /> : null }
       { smileCovy == 'on' ? <SmileCovy /> : null }
       { waitCovy == 'on' ? <WaitCovy /> : null }
+
+      <hr></hr>
+      <div>
+        <input className='inputArea' placeholder='게시글 제목을 입력해 주세요.' onChange={ (e)=>setInsertTitle(e.target.value) }></input>
+        <button className='spanBtn' onClick={ ()=>insertTitles(insertTitle) }>등록</button>
+      </div>
+
       
     </div>
   )
