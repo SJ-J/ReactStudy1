@@ -52,6 +52,14 @@
     user-select: none;
     margin-left: 20px;
 }
+.deleteBtn {
+    border: none;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    margin-left: 20px;
+    padding: 1px 3px;
+}
 
 .inputArea {
     box-sizing: border-box;

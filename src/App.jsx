@@ -43,10 +43,10 @@ function App() {
   }
 
   // 글 삭제 함수
-  // function deleteTitles(postNum) {
-  //   let copy = [...postTitle];
-  //   setPostTitle(copy.filter(postNum));
-  // }
+  function deleteTitles(i) {
+    let copy = [...postTitle];
+    setPostTitle(copy.filter( (item, index) => index != i) );
+  }
 
   return (
     <div className='App'>
@@ -69,8 +69,7 @@ function App() {
               <h4>{ postTitle[i] } 
               <button className='goodBtn' 
                       onClick={ e=>{e.stopPropagation(); changeGoodCnt(i);} }>👍</button> { goodCnt[i] } 
-              {/* <button className='goodBtn' style={{color: 'white', backgroundColor: 'gray', borderRadius: '5px', padding: '1px 3px'}}
-              onClick={ (e)=>{e.stopPropagation(); deleteTitles(i); } }> 삭제 </button> */}
+              <button className='deleteBtn' onClick={ (e)=>{e.stopPropagation(); deleteTitles(i); } }> 삭제 </button>
               </h4>
               <p>2026년 06월 16일</p>
             </li>
