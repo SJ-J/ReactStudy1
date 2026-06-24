@@ -3,17 +3,26 @@ import './App.css'
 
 function App() {
 
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const day = today.getDate().toString().padStart(2, '0');
+  const currDate = `${year}년 ${month}월 ${day}일`;
+
   let mainTitle = '⚡피카츄라이츄파이썬리액트';
-  
+
   let [postTitle, setPostTitle] = useState(['견코비는 C++ 하렴…🧑‍🎓', '뚱코비뜨끈궁둥이무침🫧', '냥코비코떼먹기🍪']);
   let [goodCnt, setGoodCnt] = useState(postTitle.map( ()=>0 ));
   let [postModal, setPostModal] = useState('off');
   let [postNum, setPostNum] = useState(0);
+  let [postDate, setPostDate] = useState(postTitle.map( ()=>'2026년 06월 16일' ));
+
   let newTitle = '견코비는 Python 하렴…🧑‍🎓';
   let [insertTitle, setInsertTitle] = useState('');
 
   let [smileCovy, setSmileCovy] = useState('off');
   let [waitCovy, setWaitCovy] = useState('off');
+
   
   // 가나다순 정렬 함수
   function abcSort() {
@@ -32,25 +41,32 @@ function App() {
 
   // 좋아요 누적 함수
   function changeGoodCnt(i) {
-    let copy = [...goodCnt];
-    copy[i] = copy[i] + 1;
-    setGoodCnt(copy);
+    let copyGoodCnt = [...goodCnt];
+    copyGoodCnt[i] = copyGoodCnt[i] + 1;
+    setGoodCnt(copyGoodCnt);
   }
 
   // 글 등록 함수
   function insertTitles(insertTitle) {
-    let copy = [...postTitle];
+    let copyTitle = [...postTitle];
+    let copyDate = [...postDate];
     if (!insertTitle) {
       alert('제목을 입력해 주세요.');
       return;
     }
-    setPostTitle(copy.concat(insertTitle));
+    setPostTitle(copyTitle.concat(insertTitle));
+    setPostDate(copyDate.concat(currDate));
   }
 
   // 글 삭제 함수
   function deleteTitles(i) {
-    let copy = [...postTitle];
-    setPostTitle(copy.filter( (item, index) => index != i) );
+    let copyTitle = [...postTitle];
+    let copyDate = [...postDate];
+    let copyGoodCnt = [...goodCnt];
+    setPostTitle(copyTitle.filter( (item, index) => index != i) );
+    setPostDate(copyDate.filter( (item, index) => index != i) );
+    setGoodCnt(copyGoodCnt.filter( (item, index) => index != i) );
+    setPostModal('off');
   }
 
   return (
@@ -74,9 +90,9 @@ function App() {
               <h4>{ postTitle[i] } 
               <button className='goodBtn' 
                       onClick={ e=>{e.stopPropagation(); changeGoodCnt(i);} }>👍</button> { goodCnt[i] } 
-              <button className='deleteBtn' onClick={ (e)=>{e.stopPropagation(); deleteTitles(i); } }> 삭제 </button>
+              <button className='deleteBtn' onClick={ (e)=>{e.stopPropagation(); deleteTitles(i);} }> 삭제 </button>
               </h4>
-              <p>2026년 06월 16일</p>
+              <p>{ postDate[i] }</p>
             </li>
           )
         })
@@ -89,7 +105,7 @@ function App() {
         의젓하게 신호등 기다리는 코비🐕‍🦺</button>
 
       {/* 콘텐츠, 버튼 토글: 조건문은 삼항연산자로 작성 */}
-      { postModal == 'on' ? <Modal postTitle={postTitle} postNum={postNum} changeTitle={changeTitle} /> : null }
+      { postModal == 'on' ? <Modal postTitle={postTitle} postNum={postNum} changeTitle={changeTitle} postDate={postDate} /> : null }
       { smileCovy == 'on' ? <SmileCovy /> : null }
       { waitCovy == 'on' ? <WaitCovy /> : null }
 
@@ -111,7 +127,7 @@ function Modal(props) {   // 콘텐츠 모달
   return (
     <div className='modal'>
       <h4>{ props.postTitle[props.postNum] }</h4>
-      <p>날짜</p>
+      <p>{ props.postDate[props.postNum] }</p>
       <p>내용</p>
       <input className='inputArea' placeholder='변경할 제목을 입력해 주세요.' onChange={ (e)=>setInputModal(e.target.value) }></input>
       <button className='spanBtn' onClick={ ()=>props.changeTitle(props.postNum, inputModal) }>제목 바꾸기</button>
