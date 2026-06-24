@@ -50,12 +50,14 @@ function App() {
   function insertTitles(insertTitle) {
     let copyTitle = [...postTitle];
     let copyDate = [...postDate];
+    let copyGoodCnt = [...goodCnt];
     if (!insertTitle) {
       alert('제목을 입력해 주세요.');
       return;
     }
     setPostTitle(copyTitle.concat(insertTitle));
     setPostDate(copyDate.concat(currDate));
+    setGoodCnt(copyGoodCnt.concat(0));
   }
 
   // 글 삭제 함수
