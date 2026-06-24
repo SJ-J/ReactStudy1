@@ -4,6 +4,7 @@ import './App.css'
 function App() {
 
   let mainTitle = '⚡피카츄라이츄파이썬리액트';
+  
   let [postTitle, setPostTitle] = useState(['견코비는 C++ 하렴…🧑‍🎓', '뚱코비뜨끈궁둥이무침🫧', '냥코비코떼먹기🍪']);
   let [goodCnt, setGoodCnt] = useState(postTitle.map( ()=>0 ));
   let [postModal, setPostModal] = useState('off');
@@ -39,6 +40,10 @@ function App() {
   // 글 등록 함수
   function insertTitles(insertTitle) {
     let copy = [...postTitle];
+    if (!insertTitle) {
+      alert('제목을 입력해 주세요.');
+      return;
+    }
     setPostTitle(copy.concat(insertTitle));
   }
 
